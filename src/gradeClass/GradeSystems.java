@@ -18,11 +18,12 @@ import java.util.Scanner;
 public class GradeSystems {
 	float[] weights = { 0.1f, 0.1f, 0.1f, 0.3f, 0.4f };
 	LinkedList<Grades> aList;
-
+	Scanner scanner;
 	public GradeSystems() {
 
 		try {
-
+			scanner = new Scanner(System.in);
+			
 			Scanner input = new Scanner(new InputStreamReader(
 					new FileInputStream(new File("gradeInput.txt")), "UTF8"));
 
@@ -112,7 +113,6 @@ public class GradeSystems {
 		showOldWeights();
 		float[] w = getNewWeights();
 		showNewWeights(w);
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("以上正確嗎 ? Y (Yes) 或 N (No)");
 		String cmd = scanner.next();
 		if (cmd.equals("Y")) {
@@ -128,7 +128,6 @@ public class GradeSystems {
 	private float[] getNewWeights() {
 		// TODO Auto-generated method stub
 		float[] w = new float[weights.length];
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("輸入新配分");
 		String[] items = { "lab1", "lab2", "lab3", "mid-term", "final exam" };
 		assert (items.length == weights.length);

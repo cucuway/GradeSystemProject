@@ -34,25 +34,4 @@ public class TestUI {
 		ui = new UI();
 		assertEquals("輸入ID或 Q (結束使用)？\r\n結束了\r\n", outContent.toString());
 	}
-
-	public void login() throws NoSuchIDExceptions, NoSuchCommandExceptions {
-		ByteArrayInputStream inContent = new ByteArrayInputStream(
-				"962001051".getBytes());
-		System.setIn(inContent);
-		ui = new UI();
-	}
-
-	@Test
-	public void testLogin() throws NoSuchIDExceptions, NoSuchCommandExceptions {
-		login();
-		final ByteArrayInputStream inContent = new ByteArrayInputStream(
-				"E".getBytes());
-		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		System.setIn(inContent);
-		// System.setIn(inContent);
-		// System.setOut(new PrintStream(outContent));
-		System.out.println(outContent.toString());
-		assertEquals("WTF", outContent.toString());
-
-	}
 }

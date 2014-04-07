@@ -14,6 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestUI {
+	/**
+	 * @uml.property  name="ui"
+	 * @uml.associationEnd  
+	 */
 	UI ui;
 
 	@Before
@@ -32,6 +36,6 @@ public class TestUI {
 		System.setIn(inContent);
 		System.setOut(new PrintStream(outContent));
 		ui = new UI();
-		assertEquals("輸入ID或 Q (結束使用)？\r\n結束了\r\n", outContent.toString());
+		assertEquals(("輸入ID或 Q (結束使用)？\r\n結束了\r\n").replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
 	}
 }

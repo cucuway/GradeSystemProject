@@ -45,8 +45,8 @@ public class TestUpdateWeight {
 		String cmdGrade = "輸入新配分\r\n    lab1            lab2            lab3            mid-term        final exam  ";
 		String newGrade = "請確認新配分\r\n    lab1        20%\r\n    lab2        20%\r\n    lab3        20%\r\n    mid-term    20%\r\n    final exam  20%\r\n";
 		String checkCmd = "以上正確嗎 ? Y (Yes) 或 N (No)\r\n";
-		assertEquals(oldGrade + cmdGrade + newGrade + checkCmd,
-				outContent.toString());
+		assertEquals((oldGrade + cmdGrade + newGrade + checkCmd).replaceAll("\\s+",""),
+				outContent.toString().replaceAll("\\s+",""));
 	}
 
 }

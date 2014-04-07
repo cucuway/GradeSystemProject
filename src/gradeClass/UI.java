@@ -12,8 +12,16 @@ import java.util.Scanner;
 import exception.*;
 
 public class UI {
+	/**
+	 * @uml.property name="aGradeSystem"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 */
 	GradeSystems aGradeSystem;
+	/**
+	 * @uml.property name="input"
+	 */
 	Scanner input;
+
 	/**
 	 * ------------------------------------------------------------------------
 	 * ---------------------------------- UI() 建構子 throws NoSuchIDExceptions,
@@ -29,13 +37,20 @@ public class UI {
 			if (ID.equals("Q")) {
 				break;
 			}
-			if (checkID(ID)) {
-				this.showWelcomeMsg(ID);
-				this.promptCommand(ID);
-
-			} else {
-				System.out.println("OTHER");
-			}
+			checkID(ID);
+			this.showWelcomeMsg(ID);
+			do {
+				String cmd = this.promptCommand(ID);
+				if (cmd.equals("G")) {
+					aGradeSystem.showGrade(ID);
+				} else if (cmd.equals("R")) {
+					aGradeSystem.showRank(ID);
+				} else if (cmd.equals("W")) {
+					aGradeSystem.updateWeights();
+				} else if (cmd.equals("E")) {
+					break;
+				}
+			} while (true);
 		}
 		this.showFinishMsg();
 		/**
@@ -75,26 +90,19 @@ public class UI {
 	 * --------------------------------------------------
 	 * ---------------------------------------------------------------
 	 */
-	public void promptCommand(String ID) throws NoSuchCommandExceptions {
-
-		while (true) {
-			System.out.println("輸入指令 1) G 顯示成績 (Grade)\n"
-					+ "      2) R 顯示排名 (Rank)\n" + "      3) W 更新配分 (Weight)\n"
-					+ "      4) E 離開選單 (Exit)\n");
-			String cmd = input.next();
-			if (cmd.equals("G")) {
-				aGradeSystem.showGrade(ID);
-			} else if (cmd.equals("R")) {
-				aGradeSystem.showRank(ID);
-			} else if (cmd.equals("W")) {
-				aGradeSystem.updateWeights();
-			} else if (cmd.equals("E")) {
-				return;
-			} else {
-				throw new NoSuchCommandExceptions();
-			}
-
+	public String promptCommand(String ID) throws NoSuchCommandExceptions {
+		System.out.println("輸入指令 1) G 顯示成績 (Grade)\n"
+				+ "      2) R 顯示排名 (Rank)\n" + "      3) W 更新配分 (Weight)\n"
+				+ "      4) E 離開選單 (Exit)\n");
+		String cmd = input.next();
+		if (cmd.equals("G")) {
+		} else if (cmd.equals("R")) {
+		} else if (cmd.equals("W")) {
+		} else if (cmd.equals("E")) {
+		} else {
+			throw new NoSuchCommandExceptions();
 		}
+		return cmd;
 
 		// 1. prompt user for inputCommand
 		// 2. if inputCommand is not G (Grade),R (Rank), W (Weights), or E

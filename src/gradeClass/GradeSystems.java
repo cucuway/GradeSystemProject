@@ -16,8 +16,18 @@ import java.util.Scanner;
  *************************************************************************** */
 
 public class GradeSystems {
+	/**
+	 * @uml.property  name="weights" multiplicity="(0 -1)" dimension="1"
+	 */
 	float[] weights = { 0.1f, 0.1f, 0.1f, 0.3f, 0.4f };
+	/**
+	 * @uml.property  name="aList"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="gradeClass.Grades"
+	 */
 	LinkedList<Grades> aList;
+	/**
+	 * @uml.property  name="scanner"
+	 */
 	Scanner scanner;
 	public GradeSystems() {
 
@@ -138,6 +148,10 @@ public class GradeSystems {
 		return w;
 	}
 
+	/**
+	 * @param w
+	 * @uml.property  name="weights"
+	 */
 	public void setWeights(float[] w) {
 		// TODO Auto-generated method stub
 		weights = w;

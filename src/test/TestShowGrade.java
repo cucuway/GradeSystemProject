@@ -15,6 +15,10 @@ import exception.NoSuchIDExceptions;
 import gradeClass.UI;
 
 public class TestShowGrade {
+	/**
+	 * @uml.property  name="ui"
+	 * @uml.associationEnd  
+	 */
 	UI ui;
 
 	@Before
@@ -44,7 +48,8 @@ public class TestShowGrade {
 		String expectGrade = "李威廷成績：lab1      81\r\n         lab2      98\r\n         lab3      84\r\n         midTerm   90\r\n         finalExam 93\r\n";
 		String cmdHeader = "輸入ID或 Q (結束使用)？\r\n";
 		String endFooter = "結束了\r\n";
-		assertEquals(cmdHeader + "Welcome 李威廷\r\n" + formatList + expectGrade
-				+ formatList + cmdHeader + endFooter, outContent.toString());
+		String expectedAC = cmdHeader + "Welcome 李威廷\r\n" + formatList + expectGrade
+				+ formatList + cmdHeader + endFooter;
+		assertEquals(expectedAC.replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
 	}
 }

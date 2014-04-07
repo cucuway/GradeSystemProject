@@ -8,8 +8,38 @@ package gradeClass;
  ************************************************************************/
 
 public class Grades {
-	public String name, ID;
-	public int lab1, lab2, lab3, midTerm, finalExam, totalGrade;
+	/**
+	 * @uml.property  name="name"
+	 */
+	public String name;
+	/**
+	 * @uml.property  name="iD"
+	 */
+	public String ID;
+	/**
+	 * @uml.property  name="lab1"
+	 */
+	public int lab1;
+	/**
+	 * @uml.property  name="lab2"
+	 */
+	public int lab2;
+	/**
+	 * @uml.property  name="lab3"
+	 */
+	public int lab3;
+	/**
+	 * @uml.property  name="midTerm"
+	 */
+	public int midTerm;
+	/**
+	 * @uml.property  name="finalExam"
+	 */
+	public int finalExam;
+	/**
+	 * @uml.property  name="totalGrade"
+	 */
+	public int totalGrade;
 
 	public Grades() {
 	} // 建構子

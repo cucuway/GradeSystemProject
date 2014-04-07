@@ -18,6 +18,10 @@ import org.junit.Test;
 import gradeClass.Grades;
 
 public class TestCalculateTotalGrade {
+	/**
+	 * @uml.property  name="aGrade"
+	 * @uml.associationEnd  
+	 */
 	Grades aGrade;
 
 	@Before

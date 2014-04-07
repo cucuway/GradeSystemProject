@@ -43,8 +43,9 @@ public class TestShowRank {
 		String expectRank = "李威廷排名第 22\r\n";
 		String cmdHeader = "輸入ID或 Q (結束使用)？\r\n";
 		String endFooter = "結束了\r\n";
-		assertEquals(cmdHeader + "Welcome 李威廷\r\n" + formatList + expectRank
-				+ formatList + cmdHeader + endFooter, outContent.toString());
+		String expectedAC = cmdHeader + "Welcome 李威廷\r\n" + formatList + expectRank
+				+ formatList + cmdHeader + endFooter;
+		assertEquals(expectedAC.replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
 	}
 
 }

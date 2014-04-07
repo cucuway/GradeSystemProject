@@ -32,11 +32,7 @@ public class TestCalculateTotalGrade {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	// @Test
-	// public void test() {
-	// fail("Not yet implemented");
-	// }
+	
 	@Test
 	public void testCalculateTotalGrade1() {
 		aGrade.lab1 = 81;
@@ -45,9 +41,6 @@ public class TestCalculateTotalGrade {
 		aGrade.midTerm = 90;
 		aGrade.finalExam = 93;
 		float[] weights = {0.1f, 0.1f, 0.1f, 0.3f, 0.4f};
-		// 1. 手算 expected result (81*0.1+98*0.1+84*0.1+90*0.3+93*0.4=90.5四捨五入91)
-		// 2. 呼叫 aGrade.calculateTotalGrade (weights) 算actual result
-		// 3. assert equal of the two results
 		assertEquals(aGrade.calculateTotalGrade(weights), 91);
 	}
 
@@ -59,9 +52,6 @@ public class TestCalculateTotalGrade {
 		aGrade.midTerm = 90;
 		aGrade.finalExam = 93;
 		float[] weights = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
-		// 1. 手算 expected result (81*0.2+98*0.2+84*0.2+90*0.2+93*0.2四捨五入89)
-		// 2. 呼叫 aGrade.calculateTotalGrade (weights) 算actual result
-		// 3. assert equal of the two results
 		assertEquals(aGrade.calculateTotalGrade(weights), 89);
 	}
 }

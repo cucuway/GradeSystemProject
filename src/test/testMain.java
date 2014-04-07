@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import exception.NoSuchCommandExceptions;
 import exception.NoSuchIDExceptions;
 import gradeClass.Main;
-import gradeClass.UI;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class testMain {
+public class TestMain {
 	@Before
 	public void setUp() throws Exception {
 	}

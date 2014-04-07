@@ -1,39 +1,49 @@
 package gradeClass;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-/**
- * *************************************************************************
- * class GradeSystems儲存 a list of student grades.
- * 
- * containsID(ID) //看aGradeSystem有否含此ID GradeSystems () //建構子 showGrade(ID)
- * showRank(ID) updateWeights ()
- *************************************************************************** */
+import exception.NoSuchCommandExceptions;
 
+/**
+ * GradeSystems store a list of student grades. Apply the method containsID(ID),
+ * showRank(ID) and updateWeights(). You can query information with ID.
+ * 
+ * @author Yang
+ * 
+ */
 public class GradeSystems {
 	/**
-	 * @uml.property  name="weights" multiplicity="(0 -1)" dimension="1"
+	 * @uml.property name="weights" multiplicity="(0 -1)" dimension="1"
 	 */
 	float[] weights = { 0.1f, 0.1f, 0.1f, 0.3f, 0.4f };
 	/**
-	 * @uml.property  name="aList"
-	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="gradeClass.Grades"
+	 * @uml.property name="aList"
+	 * @uml.associationEnd multiplicity="(0 -1)" elementType="gradeClass.Grades"
 	 */
 	LinkedList<Grades> aList;
 	/**
-	 * @uml.property  name="scanner"
+	 * @uml.property name="scanner"
 	 */
 	Scanner scanner;
+
 	public GradeSystems() {
 
+		// 1. open input file stream.
+		// 2. use LinkedList.class build an empty list of grades name 'aList'
+		// 3. read line from file stream.
+		// 4. while not endOfFile
+		// 4.1. call Grades() new a object name with aGrade.
+		// 4.2. use Java Scanner.class scan line consider as 'aGrade'
+		// 4.3. aGrade.calculateTotalGrade(weights) assign to aGrade.aTotalGrade
+		// 4.4. aGrade push into aList
+		// 5. if endOfLine then read line end if end while
 		try {
 			scanner = new Scanner(System.in);
-			
+
 			Scanner input = new Scanner(new InputStreamReader(
 					new FileInputStream(new File("gradeInput.txt")), "UTF8"));
 
@@ -49,29 +59,21 @@ public class GradeSystems {
 				aGrade.midTerm = input.nextInt();
 				aGrade.finalExam = input.nextInt();
 				aGrade.totalGrade = aGrade.calculateTotalGrade(weights);
-				// System.out.println(aGrade.ID);
 				aList.add(aGrade);
 			}
+			input.close();
+		} catch (Exception e) {
+			// TODO
 		}
-
-		catch (Exception e) {
-
-		}
-
-		// 1. 開檔 input file
-		// 2. 用Java LinkedList建構an empty list of grades叫 aList
-		// 3. read line
-		// 4. while not endOfFile
-		// 1.call Grades() 建構aGrade
-		// 2.用 Java Scanner 來 scan line 把各欄位存入aGrade
-		// 3. aGrade.calculateTotalGrade(weights) 回傳aTotalGrade把它存入aGrade
-		// 4. 把 aGrade 存入 aList
-		// 5. if endOfLine then read line end if
-		// end while
 	}
 
+	/**
+	 * using O(n) time find identity from grade list.
+	 * 
+	 * @param ID
+	 *            [String] show grade of identity.
+	 */
 	public void showGrade(String ID) {
-		// show 這 ID 的 grade
 		for (int i = 0; i < aList.size(); i++) {
 			Grades aGrade = aList.get(i);
 			if (ID.equals(aGrade.ID)) {
@@ -91,8 +93,19 @@ public class GradeSystems {
 
 	}
 
+	/**
+	 * using O(n) time find identity from grade list.
+	 * 
+	 * @param ID
+	 * @return #rank.
+	 */
 	public int showRank(String ID) {
-
+		// 1. 取得這 ID 的 theTotalGrade
+		// 2. 令rank 為 1
+		// 3. loop aGrade in aList if aTotalGrade > theTotalGrade then
+		// rank加1(退1名) end loop
+		// (逐一比較，單層迴圈)
+		// 4. 回傳 rank
 		int theTotalGrade = 0, rank = 0;
 		String name = "";
 		for (Grades grade : aList) {
@@ -100,26 +113,22 @@ public class GradeSystems {
 				theTotalGrade = grade.totalGrade;
 				name = grade.name;
 				rank = 1;
-
 			}
 		}
-
 		for (Grades grade : aList) {
 			if (grade.totalGrade > theTotalGrade)
 				rank++;
 		}
-
 		System.out.println(name + "排名第 " + rank);
 		return rank;
-		// 1. 取得這 ID 的 theTotalGrade
-		// 2. 令rank 為 1
-		// 3. loop aGrade in aList if aTotalGrade > theTotalGrade then
-		// rank加1(退1名) end loop
-		// (逐一比較，單層迴圈)
-		// 4. 回傳 rank
 	}
 
-	public void updateWeights() {
+	/**
+	 * loop aGrade in aList to calculateTotalGrade(weights) end loop
+	 * 
+	 * @throws NoSuchCommandExceptions
+	 */
+	public void updateWeights() throws NoSuchCommandExceptions {
 		showOldWeights();
 		float[] w = getNewWeights();
 		showNewWeights(w);
@@ -132,17 +141,23 @@ public class GradeSystems {
 						weights);
 			}
 		}
-		// 4. loop aGrade in aList to calculateTotalGrade(weights) end loop
 	}
 
-	private float[] getNewWeights() {
-		// TODO Auto-generated method stub
+	/**
+	 * 
+	 * @return float array with weight distribution
+	 * @throws NoSuchCommandExceptions
+	 */
+	private float[] getNewWeights() throws NoSuchCommandExceptions {
 		float[] w = new float[weights.length];
 		System.out.println("輸入新配分");
 		String[] items = { "lab1", "lab2", "lab3", "mid-term", "final exam" };
 		assert (items.length == weights.length);
 		for (int i = 0; i < items.length; i++) {
 			System.out.print(String.format("%4s%-12s", "", items[i]));
+			if (!scanner.hasNextFloat()) {
+				throw new NoSuchCommandExceptions();
+			}
 			w[i] = scanner.nextFloat() / 100;
 		}
 		return w;
@@ -150,15 +165,13 @@ public class GradeSystems {
 
 	/**
 	 * @param w
-	 * @uml.property  name="weights"
+	 * @uml.property name="weights"
 	 */
 	public void setWeights(float[] w) {
-		// TODO Auto-generated method stub
 		weights = w;
 	}
 
 	private void showOldWeights() {
-		// TODO Auto-generated method stub
 		System.out.println("舊配分");
 		String[] items = { "lab1", "lab2", "lab3", "mid-term", "final exam" };
 		assert (items.length == weights.length);
@@ -169,7 +182,6 @@ public class GradeSystems {
 	}
 
 	private void showNewWeights(float[] w) {
-		// TODO Auto-generated method stub
 		System.out.println("請確認新配分");
 		String[] items = { "lab1", "lab2", "lab3", "mid-term", "final exam" };
 		assert (items.length == weights.length);
@@ -179,14 +191,17 @@ public class GradeSystems {
 		}
 	}
 
+	/**
+	 * judge whether ID exists in aGradeSystem
+	 * 
+	 * @param ID
+	 * @return true or false.
+	 */
 	public boolean containsID(String ID) {
-		// 看 ID 是否含在 aGradeSystem內
 		for (int i = 0; i < aList.size(); i++) {
-			// System.out.println(aList.get(i).ID);
 			if (aList.get(i).ID.equals(ID)) {
 				return true;
 			}
-
 		}
 		return false;
 	}

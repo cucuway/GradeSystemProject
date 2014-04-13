@@ -11,13 +11,18 @@ import java.util.Scanner;
  ************************************************************************ */
 import exception.*;
 
-/**
- * Apply the method checkID(ID), promptCommand(), promptID(), showFinishMsg(),
- * and showWelcomeMsg().
- * 
- * @author Yang
- * 
- */
+/** ***********************************************************************
+class UI (user interface) 
+
+checkID(ID)
+promptCommand()
+promptID()
+showFinishMsg()
+showWelcomeMsg()
+UI() 建構子 建構 aGradeSystem
+************************************************************************ */
+
+
 public class UI {
 	/**
 	 * @uml.property name="aGradeSystem"
@@ -74,13 +79,12 @@ public class UI {
 		this.showFinishMsg();
 	}
 
-	/**
-	 * ID a user ID ex: 123456789 time: O(n) n is aGradeSystem 內全班人數
-	 * 
-	 * @param ID
-	 * @return
-	 * @throws NoSuchIDExceptions
-	 */
+	/**-------------------------------------------------------------------------------------------------------------
+	checkID (ID) throws NoSuchIDExceptions return Boolean
+	parameter: ID   a user ID  ex: 123456789
+	time:     O(n)  n is  aGradeSystem 內全班人數
+	-----------------------------------------------------------------------------------------------------------------*/
+
 	public boolean checkID(String ID) throws NoSuchIDExceptions {
 		// 1. 要aGradeSystem 做containsID(ID) 看 ID 是否含在 aGradeSystem內
 		// 2. if not, throw an object of NoSuchIDExceptions
@@ -92,12 +96,10 @@ public class UI {
 		}
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 * @return
-	 * @throws NoSuchCommandExceptions
-	 */
+	/**-------------------------------------------------------------------------------------------------------------
+	promptCommand () throws NoSuchCommandExceptions
+	-----------------------------------------------------------------------------------------------------------------*/
+
 	public String promptCommand(String ID) throws NoSuchCommandExceptions {
 		// 1. prompt user for inputCommand
 		// 2. if inputCommand is not 'G' (Grade), 'R' (Rank), 'W' (Weights), or

@@ -8,13 +8,16 @@ import java.util.Scanner;
 
 import exception.NoSuchCommandExceptions;
 
-/**
- * GradeSystems store a list of student grades. Apply the method containsID(ID),
- * showRank(ID) and updateWeights(). You can query information with ID.
- * 
- * @author Yang
- * 
- */
+/** *************************************************************************
+class GradeSystems儲存 a list of student grades.
+
+containsID(ID)  //看aGradeSystem有否含此ID
+GradeSystems () //建構子
+showGrade(ID)
+showRank(ID)
+updateWeights ()
+*************************************************************************** */
+
 public class GradeSystems {
 	/**
 	 * @uml.property name="weights" multiplicity="(0 -1)" dimension="1"
@@ -79,9 +82,9 @@ public class GradeSystems {
 			if (ID.equals(aGrade.ID)) {
 				System.out.print(aGrade.name + "成績：");
 				System.out.println(String
-						.format("%-10s%d", "lab1", aGrade.lab1));
+						.format("%-10s%d", "lab1", aGrade.lab1));// %-10s 表示string長度佔10格，靠左對齊
 				System.out.println(String.format("%9s%-10s%d", "", "lab2",
-						aGrade.lab2));
+						aGrade.lab2)); // %9s 表示一開始先空9格
 				System.out.println(String.format("%9s%-10s%d", "", "lab3",
 						aGrade.lab3));
 				System.out.println(String.format("%9s%-10s%d", "", "midTerm",
@@ -108,7 +111,7 @@ public class GradeSystems {
 		// 4. 回傳 rank
 		int theTotalGrade = 0, rank = 0;
 		String name = "";
-		for (Grades grade : aList) {
+		for (Grades grade : aList) { // foreach 寫法
 			if (grade.ID.equals(ID)) {
 				theTotalGrade = grade.totalGrade;
 				name = grade.name;

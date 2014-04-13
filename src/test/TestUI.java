@@ -37,6 +37,8 @@ public class TestUI {
 		System.setOut(new PrintStream(outContent));
 		ui = new UI();
 		assertEquals(("輸入ID或 Q (結束使用)？\r\n結束了\r\n").replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
+		//'\r'使游標移到行首，'\n'是換行。通常用的Enter是兩個加起來。  string.replaceAll("\\s+","")可將字串中所有空白消除; 
+		// \s 指的是空白字元，\s+ 是連續多個空白字元，要打成 "\\s+"，第一個反斜線類似跳脫字元。
 	}
 	
 	@Test
@@ -106,6 +108,6 @@ public class TestUI {
 		String expectedAC = cmdHeader + "Welcome 李威廷\r\n" + formatList + expectRank
 				+ formatList + cmdHeader + endFooter;
 		assertEquals(expectedAC.replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
-		// \\s+是消去空白字元
+		
 	}	
 }

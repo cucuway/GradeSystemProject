@@ -47,6 +47,8 @@ public class TestGradeSystems {
 		String checkCmd = "以上正確嗎 ? Y (Yes) 或 N (No)\r\n";
 		assertEquals((oldGrade + cmdGrade + newGrade + checkCmd).replaceAll(
 				"\\s+", ""), outContent.toString().replaceAll("\\s+", ""));
+		//'\r'使游標移到行首，'\n'是換行。通常用的Enter是兩個加起來。  string.replaceAll("\\s+","")可將字串中所有空白消除; 
+		// \s 指的是空白字元，\s+ 是連續多個空白字元，要打成 "\\s+"，第一個反斜線類似跳脫字元。
 	}
 
 	@Test

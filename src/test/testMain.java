@@ -29,8 +29,10 @@ public class TestMain {
 		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setIn(inContent);
 		System.setOut(new PrintStream(outContent));
-		Main.main(null);
+		Main.main(null);// 因為在main(String args[])中有傳參數的地方，這邊沒有參數要傳，所以放null
 		assertEquals("輸入ID或 Q (結束使用)？\r\nID錯了!\r\n".replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
+		//'\r'使游標移到行首，'\n'是換行。通常用的Enter是兩個加起來。  string.replaceAll("\\s+","")可將字串中所有空白消除; 
+		// \s 指的是空白字元，\s+ 是連續多個空白字元，要打成 "\\s+"，第一個反斜線類似跳脫字元。
 	}
 	@Test
 	public void testErrorCommand() throws NoSuchIDExceptions, NoSuchCommandExceptions {
@@ -45,5 +47,6 @@ public class TestMain {
 		String cmdHeader = "輸入ID或 Q (結束使用)？\r\n";
 		String exceptedAC =cmdHeader + welcomeString + formatList + "指令錯了!\r\n"; 
 		assertEquals(exceptedAC.replaceAll("\\s+",""), outContent.toString().replaceAll("\\s+",""));
+		
 	}
 }

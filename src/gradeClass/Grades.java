@@ -54,6 +54,7 @@ public class Grades {
 	 * @return round off weighted-average.
 	 */
 	public int calculateTotalGrade(float[] weights) {
+		//用Math.round() 可四捨五入
 		int aTotalGrade = Math.round(lab1 * weights[0] + lab2 * weights[1]
 				+ lab3 * weights[2] + midTerm * weights[3] + finalExam
 				* weights[4]);

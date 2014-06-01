@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import ncu.csie.UI;
+import ncu.csie.exceptions.DuplicateExceptions;
 import ncu.csie.exceptions.NoSuchCommandExceptions;
 import ncu.csie.exceptions.NoSuchIDExceptions;
 
@@ -31,7 +32,7 @@ public class UnitTest {
 
 	@Test
 	public void testFinishMsg() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("Q".getBytes());
 		System.setIn(inContent);
@@ -45,7 +46,7 @@ public class UnitTest {
 
 	@Test
 	public void testShowGrade1() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("955002056\nG\nE\nQ".getBytes());
 		System.setIn(inContent);
@@ -61,7 +62,7 @@ public class UnitTest {
 
 	@Test
 	public void testShowGrade2() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("985002201\nG\nE\nQ".getBytes());
 		System.setIn(inContent);
@@ -77,7 +78,7 @@ public class UnitTest {
 
 	@Test
 	public void testShowRank1() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("985002201\nR\nE\nQ".getBytes());
 		System.setIn(inContent);
@@ -91,7 +92,7 @@ public class UnitTest {
 
 	@Test
 	public void testShowRank2() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("985002002\nR\nE\nQ".getBytes());
 		System.setIn(inContent);
@@ -105,7 +106,7 @@ public class UnitTest {
 
 	@Test
 	public void testUpdateWeights1() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream(
 				"985002002\nW\n20\n20\n20\n20\n20\nY\nE\nQ".getBytes());
@@ -122,7 +123,7 @@ public class UnitTest {
 
 	@Test
 	public void testUpdateWeights2() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream(
 				"985002002\nW\n30\n20\n10\n5\n35\nY\nE\nQ".getBytes());
@@ -139,7 +140,7 @@ public class UnitTest {
 
 	@Test
 	public void testContainsID1() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("Q".getBytes());
 		System.setIn(inContent);
@@ -151,7 +152,7 @@ public class UnitTest {
 
 	@Test
 	public void testContainsID2() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("Q".getBytes());
 		System.setIn(inContent);
@@ -163,7 +164,7 @@ public class UnitTest {
 
 	@Test(expected = NoSuchCommandExceptions.class)
 	public void testException1() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("985002002\nX\n".getBytes());
 		System.setIn(inContent);
@@ -174,7 +175,7 @@ public class UnitTest {
 
 	@Test(expected = NoSuchIDExceptions.class)
 	public void testException2() throws NoSuchIDExceptions,
-			NoSuchCommandExceptions {
+			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream("123456\n".getBytes());
 		System.setIn(inContent);

@@ -20,6 +20,9 @@ public class Main extends Object {
 			myUI = new UI();
 		} catch (NoSuchIDExceptions e1) {
 		} catch (NoSuchCommandExceptions e2) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		myUI=null;
 	}

@@ -2,6 +2,7 @@ package ncu.csie;
 
 import java.util.Scanner;
 
+import ncu.csie.exceptions.DuplicateExceptions;
 import ncu.csie.exceptions.NoSuchCommandExceptions;
 import ncu.csie.exceptions.NoSuchIDExceptions;
 
@@ -23,9 +24,10 @@ public class UI {
 	 * ------------------------------------------------------------------------
 	 * UI() 建構子 throws NoSuchIDExceptions, NoSuchCommandExceptions
 	 * ------------------------------------------------------------
+	 * @throws DuplicateExceptions 
 	 */
 
-	public UI() throws NoSuchIDExceptions, NoSuchCommandExceptions {
+	public UI() throws NoSuchIDExceptions, NoSuchCommandExceptions, DuplicateExceptions {
 		try {
 			aGradeSystem = new GradeSystems(scanner);
 			while (true) {
@@ -62,12 +64,14 @@ public class UI {
 	 * ------------------------------------------------------------------------
 	 * promptCommand () throws NoSuchCommandExceptions
 	 * ---------------------------------------------------------------
+	 * @throws DuplicateExceptions 
+	 * @throws NoSuchIDExceptions 
 	 */
 
-	public void promptCommand() throws NoSuchCommandExceptions {
+	public void promptCommand() throws NoSuchCommandExceptions, DuplicateExceptions, NoSuchIDExceptions {
 		while (true) {
 			System.out
-					.println("輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) W更新配分 (Weight)\n\t4) E 離開選單 (Exit)\n\t\t使用者輸入：");
+					.println("輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) W 更新配分 (Weight)\n\t4) A 新增學生 (Add)\n\t5) D 刪減學生 (Delete)\n\t6) M 更改分數 (Modify)\n\t7) E 離開選單 (Exit)\n\t\t使用者輸入：");
 			String intputCommand = scanner.next();
 			switch (intputCommand.charAt(0)) {
 			case 'G':
@@ -81,6 +85,15 @@ public class UI {
 				break;
 			case 'E':
 				return;
+			case 'A':
+				aGradeSystem.addStudent();
+				break;
+			case 'D':
+				aGradeSystem.removeStudent();
+				break;
+			case 'M':
+				aGradeSystem.modifyStudentGrade();
+				break;
 			default:
 				throw new NoSuchCommandExceptions();
 			}

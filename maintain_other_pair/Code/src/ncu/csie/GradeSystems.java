@@ -1,12 +1,16 @@
 package ncu.csie;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import ncu.csie.exceptions.DuplicateExceptions;
+import ncu.csie.exceptions.NoSuchIDExceptions;
 import ncu.csie.modle.Grades;
 
 /**
@@ -23,6 +27,7 @@ public class GradeSystems {
 	Grades temp;
 	Grades currentUser;
 	Scanner scanner;
+	String localTextFile = "input.txt";
 
 	GradeSystems(Scanner scanner) {
 		this.scanner = scanner;
@@ -31,7 +36,7 @@ public class GradeSystems {
 		String gInformation[];
 
 		try {
-			in = new BufferedReader(new FileReader("input.txt"));
+			in = new BufferedReader(new FileReader(localTextFile));
 			do {
 				text = in.readLine();
 				if (text != null) {
@@ -144,6 +149,61 @@ public class GradeSystems {
 		}
 	}
 
+	public void addStudent() throws DuplicateExceptions {
+		System.out.println("輸入新增學生的ID");
+		String addStuId = scanner.next();
+		if (this.containsID(addStuId) >= 0)
+			throw new DuplicateExceptions();
+		Grades addStuGrade = this.getNewStudentGrade();
+		addStuGrade.setID(addStuId);
+		setAddStudent(addStuGrade);
+	}
+
+	public void removeStudent() throws NoSuchIDExceptions {
+		System.out.println("輸入刪減學生的ID");
+		String rmStuId = scanner.next();
+		int rmStuGradeIdx;
+		if ((rmStuGradeIdx = this.containsID(rmStuId)) < 0)
+			throw new NoSuchIDExceptions();
+		setRemoveStudent(aList.get(rmStuGradeIdx));
+	}
+
+	public void modifyStudentGrade() {
+
+	}
+
+	private void setAddStudent(Grades addStuGrade) {
+		System.out
+				.printf(String.format("確認新增學生%s的姓名及成績\n", addStuGrade.getID()));
+		System.out.printf("\t姓名\t%s\n", addStuGrade.getName());
+		System.out.printf("\tLab1\t%d\n", addStuGrade.getlab1());
+		System.out.printf("\tLab2\t%d\n", addStuGrade.getlab2());
+		System.out.printf("\tLab3\t%d\n", addStuGrade.getlab3());
+		System.out.printf("\tMid-term\t%d\n", addStuGrade.getmidTerm());
+		System.out.printf("\tFinal exam\t%d\n", addStuGrade.getfinalExam());
+
+		System.out.printf("(yes/no)\n");
+		if (scanner.next().charAt(0) == 'y') {
+			aList.add(addStuGrade);
+			writeBackDataBase();
+			System.out.printf("新增學生%s%s 完成了\n", addStuGrade.getID(),
+					addStuGrade.getName());
+		}
+	}
+
+	private void setRemoveStudent(Grades rmStuGrade) {
+		System.out.printf(String.format("確認刪減學生%s%s (yes/no)\n",
+				rmStuGrade.getID(), rmStuGrade.getName()));
+
+		if (scanner.next().charAt(0) == 'y') {
+			if (aList.remove(rmStuGrade)) {
+				writeBackDataBase();
+				System.out.printf("刪減學生%s%s 完成了\n", rmStuGrade.getID(),
+						rmStuGrade.getName());
+			}
+		}
+	}
+
 	private void setWeights(float[] newWeight) {
 		System.out
 				.printf("請確認新配分\n\tlab1 %.0f%%\n\tlab2 %.0f%%\n\tlab3 %.0f%%\n\tmid-term %.0f%%\n\tfinal exam %.0f%%\n  以上正確嗎? Y (Yes) 或 N (No)",
@@ -169,6 +229,24 @@ public class GradeSystems {
 		newWeight[4] = Float.valueOf(scanner.next());
 	}
 
+	private Grades getNewStudentGrade() {
+		Grades aGrade = new Grades();
+
+		System.out.printf("\t姓名 ");
+		aGrade.setName(scanner.next());
+		System.out.printf("\tlab1 ");
+		aGrade.setlab1(Integer.valueOf(scanner.next()));
+		System.out.printf("\tlab2 ");
+		aGrade.setlab2(Integer.valueOf(scanner.next()));
+		System.out.printf("\tlab3 ");
+		aGrade.setlab3(Integer.valueOf(scanner.next()));
+		System.out.printf("\tmid-term ");
+		aGrade.setmidTerm(Integer.valueOf(scanner.next()));
+		System.out.printf("\tfinalExam ");
+		aGrade.setfinalExam(Integer.valueOf(scanner.next()));
+		return aGrade;
+	}
+
 	private void showOldWeights() {
 		System.out
 				.printf("舊配分\n\tlab1 %.0f%%\n\tlab2 %.0f%%\n\tlab3 %.0f%%\n\tmid-term %.0f%%\n\tfinal exam %.0f%%\n",
@@ -176,4 +254,24 @@ public class GradeSystems {
 						weights[3] * 100, weights[4] * 100);
 	}
 
+	private void writeBackDataBase() {
+		BufferedWriter out;
+
+		try {
+			out = new BufferedWriter(new FileWriter(localTextFile));
+			for (Grades aGrade : aList) {
+				String item;
+				item = String.format("%s %s %d %d %d %d %d", aGrade.getID(),
+						aGrade.getName(), aGrade.getlab1(), aGrade.getlab2(),
+						aGrade.getlab3(), aGrade.getmidTerm(),
+						aGrade.getfinalExam());
+				out.write(item);
+				out.newLine();
+			}
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

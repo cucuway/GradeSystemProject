@@ -79,4 +79,13 @@ public class Grades {
 	public int getTotalGrade() {
 		return totalGrade;
 	}
+	
+	public void showGrade() {
+		System.out.printf("\t©m¦W\t%s\n", getName());
+		System.out.printf("\tLab1\t%d\n", getlab1());
+		System.out.printf("\tLab2\t%d\n", getlab2());
+		System.out.printf("\tLab3\t%d\n", getlab3());
+		System.out.printf("\tMid-term\t%d\n", getmidTerm());
+		System.out.printf("\tFinal exam\t%d\n", getfinalExam());
+	}
 }

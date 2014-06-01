@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -168,26 +170,27 @@ public class GradeSystems {
 		setRemoveStudent(aList.get(rmStuGradeIdx));
 	}
 
-	public void modifyStudentGrade() {
-
+	public void modifyStudentGrade() throws NoSuchIDExceptions {
+		System.out.println("輸入更改分數學生的ID");
+		String moStuId = scanner.next();
+		int moStuGradeIdx;
+		if ((moStuGradeIdx = this.containsID(moStuId)) < 0)
+			throw new NoSuchIDExceptions();
+		setModifyStudentGrade(aList.get(moStuGradeIdx));
 	}
 
 	private void setAddStudent(Grades addStuGrade) {
 		System.out
 				.printf(String.format("確認新增學生%s的姓名及成績\n", addStuGrade.getID()));
-		System.out.printf("\t姓名\t%s\n", addStuGrade.getName());
-		System.out.printf("\tLab1\t%d\n", addStuGrade.getlab1());
-		System.out.printf("\tLab2\t%d\n", addStuGrade.getlab2());
-		System.out.printf("\tLab3\t%d\n", addStuGrade.getlab3());
-		System.out.printf("\tMid-term\t%d\n", addStuGrade.getmidTerm());
-		System.out.printf("\tFinal exam\t%d\n", addStuGrade.getfinalExam());
+
+		addStuGrade.showGrade();
 
 		System.out.printf("(yes/no)\n");
 		if (scanner.next().charAt(0) == 'y') {
 			aList.add(addStuGrade);
-			writeBackDataBase();
-			System.out.printf("新增學生%s%s 完成了\n", addStuGrade.getID(),
-					addStuGrade.getName());
+			if (writeBackDataBase())
+				System.out.printf("新增學生%s%s 完成了\n", addStuGrade.getID(),
+						addStuGrade.getName());
 		}
 	}
 
@@ -197,11 +200,62 @@ public class GradeSystems {
 
 		if (scanner.next().charAt(0) == 'y') {
 			if (aList.remove(rmStuGrade)) {
-				writeBackDataBase();
-				System.out.printf("刪減學生%s%s 完成了\n", rmStuGrade.getID(),
-						rmStuGrade.getName());
+				if (writeBackDataBase())
+					System.out.printf("刪減學生%s%s 完成了\n", rmStuGrade.getID(),
+							rmStuGrade.getName());
 			}
 		}
+	}
+
+	private void setModifyStudentGrade(Grades moStuGrade) {
+		moStuGrade.showGrade();
+
+		Class[] parameterTypes = new Class[1];
+		parameterTypes[0] = int.class;
+		Method[] setFunc = new Method[5];
+		String[] displayLabel = {"Lab1", "Lab2", "Lab3", "Mid-term", "Final exam"};
+		
+		assert(setFunc.length == displayLabel.length);
+		try {
+			setFunc[0] = Grades.class.getMethod("setlab1", parameterTypes);
+			setFunc[1] = Grades.class.getMethod("setlab2", parameterTypes);
+			setFunc[2] = Grades.class.getMethod("setlab3", parameterTypes);
+			setFunc[3] = Grades.class.getMethod("setmidTerm", parameterTypes);
+			setFunc[4] = Grades.class.getMethod("setfinalExam", parameterTypes);
+
+			for (int i = 0; i < setFunc.length; i++) {
+				System.out.printf("更改%s %s 分數? (yes/no)", moStuGrade.getName(), displayLabel[i]);
+				if (scanner.next().charAt(0) == 'y') {
+					System.out.printf("輸入%s %s新分數 ", moStuGrade.getName(), displayLabel[i]);
+					
+					Object[] parameters = new Object[1];
+			        parameters[0] = Integer.parseInt(scanner.next());
+			        setFunc[i].invoke(moStuGrade, parameters);
+			        
+			        System.out.printf("%s新分數%s %s 改好了\n", moStuGrade.getName(), displayLabel[i], parameters[0].toString());
+				}
+			}
+			
+			if(writeBackDataBase()) {
+				System.out.printf("更改分數%s %s 完成了", moStuGrade.getID(), moStuGrade.getName());
+			}
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	private void setWeights(float[] newWeight) {
@@ -254,7 +308,7 @@ public class GradeSystems {
 						weights[3] * 100, weights[4] * 100);
 	}
 
-	private void writeBackDataBase() {
+	private boolean writeBackDataBase() {
 		BufferedWriter out;
 
 		try {
@@ -269,9 +323,11 @@ public class GradeSystems {
 				out.newLine();
 			}
 			out.close();
+			return true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 }

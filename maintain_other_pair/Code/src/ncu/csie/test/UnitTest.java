@@ -48,7 +48,7 @@ public class UnitTest {
 	public void testShowGrade1() throws NoSuchIDExceptions,
 			NoSuchCommandExceptions, DuplicateExceptions {
 
-		inContent = new ByteArrayInputStream("955002056\nG\nE\nQ".getBytes());
+		inContent = new ByteArrayInputStream("955002056\nG\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -64,7 +64,7 @@ public class UnitTest {
 	public void testShowGrade2() throws NoSuchIDExceptions,
 			NoSuchCommandExceptions, DuplicateExceptions {
 
-		inContent = new ByteArrayInputStream("985002201\nG\nE\nQ".getBytes());
+		inContent = new ByteArrayInputStream("985002201\nG\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -80,7 +80,7 @@ public class UnitTest {
 	public void testShowRank1() throws NoSuchIDExceptions,
 			NoSuchCommandExceptions, DuplicateExceptions {
 
-		inContent = new ByteArrayInputStream("985002201\nR\nE\nQ".getBytes());
+		inContent = new ByteArrayInputStream("985002201\nR\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -94,7 +94,7 @@ public class UnitTest {
 	public void testShowRank2() throws NoSuchIDExceptions,
 			NoSuchCommandExceptions, DuplicateExceptions {
 
-		inContent = new ByteArrayInputStream("985002002\nR\nE\nQ".getBytes());
+		inContent = new ByteArrayInputStream("985002002\nR\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
@@ -109,16 +109,16 @@ public class UnitTest {
 			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream(
-				"985002002\nW\n20\n20\n20\n20\n20\nY\nE\nQ".getBytes());
+				"985002002\nW\n20\n20\n20\n20\n20\nY\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		myUI = new UI();
-		assertEquals(true, myUI.aGradeSystem.weights[0] == 20
-				&& myUI.aGradeSystem.weights[1] == 20
-				&& myUI.aGradeSystem.weights[2] == 20
-				&& myUI.aGradeSystem.weights[3] == 20
-				&& myUI.aGradeSystem.weights[4] == 20);
+		assertEquals(true, myUI.aGradeSystem.weights[0] == 0.20f
+				&& myUI.aGradeSystem.weights[1] == 0.20f
+				&& myUI.aGradeSystem.weights[2] == 0.20f
+				&& myUI.aGradeSystem.weights[3] == 0.20f
+				&& myUI.aGradeSystem.weights[4] == 0.20f);
 	}
 
 	@Test
@@ -126,16 +126,16 @@ public class UnitTest {
 			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream(
-				"985002002\nW\n30\n20\n10\n5\n35\nY\nE\nQ".getBytes());
+				"985002002\nW\n30\n20\n10\n5\n35\nY\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		myUI = new UI();
-		assertEquals(true, myUI.aGradeSystem.weights[0] == 30
-				&& myUI.aGradeSystem.weights[1] == 20
-				&& myUI.aGradeSystem.weights[2] == 10
-				&& myUI.aGradeSystem.weights[3] == 5
-				&& myUI.aGradeSystem.weights[4] == 35);
+		assertEquals(true, myUI.aGradeSystem.weights[0] == 0.30f
+				&& myUI.aGradeSystem.weights[1] == 0.20f
+				&& myUI.aGradeSystem.weights[2] == 0.10f
+				&& myUI.aGradeSystem.weights[3] == 0.05f
+				&& myUI.aGradeSystem.weights[4] == 0.35f);
 	}
 
 	@Test
@@ -184,4 +184,20 @@ public class UnitTest {
 		myUI = new UI();
 	}
 
+	@Test
+	public void testUpdateWeights3() throws NoSuchIDExceptions,
+			NoSuchCommandExceptions, DuplicateExceptions {
+
+		inContent = new ByteArrayInputStream(
+				"985002002\nG\nW\n20\n20\n20\n20\n20\nY\nG\nQ\nQ".getBytes());
+		System.setIn(inContent);
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		myUI = new UI();
+		assertEquals(
+				92,
+				myUI.aGradeSystem.aList.get(
+						myUI.aGradeSystem.containsID("985002002"))
+						.getTotalGrade());
+	}
 }

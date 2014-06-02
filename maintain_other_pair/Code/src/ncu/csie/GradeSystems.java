@@ -188,9 +188,8 @@ public class GradeSystems {
 		System.out.printf("(yes/no)\n");
 		if (scanner.next().charAt(0) == 'y') {
 			aList.add(addStuGrade);
-			if (writeBackDataBase())
-				System.out.printf("新增學生%s%s 完成了\n", addStuGrade.getID(),
-						addStuGrade.getName());
+			System.out.printf("新增學生%s%s 完成了\n", addStuGrade.getID(),
+					addStuGrade.getName());
 		}
 	}
 
@@ -200,9 +199,8 @@ public class GradeSystems {
 
 		if (scanner.next().charAt(0) == 'y') {
 			if (aList.remove(rmStuGrade)) {
-				if (writeBackDataBase())
-					System.out.printf("刪減學生%s%s 完成了\n", rmStuGrade.getID(),
-							rmStuGrade.getName());
+				System.out.printf("刪減學生%s%s 完成了\n", rmStuGrade.getID(),
+						rmStuGrade.getName());
 			}
 		}
 	}
@@ -213,9 +211,10 @@ public class GradeSystems {
 		Class[] parameterTypes = new Class[1];
 		parameterTypes[0] = int.class;
 		Method[] setFunc = new Method[5];
-		String[] displayLabel = {"Lab1", "Lab2", "Lab3", "Mid-term", "Final exam"};
-		
-		assert(setFunc.length == displayLabel.length);
+		String[] displayLabel = { "Lab1", "Lab2", "Lab3", "Mid-term",
+				"Final exam" };
+
+		assert (setFunc.length == displayLabel.length);
 		try {
 			setFunc[0] = Grades.class.getMethod("setlab1", parameterTypes);
 			setFunc[1] = Grades.class.getMethod("setlab2", parameterTypes);
@@ -224,21 +223,25 @@ public class GradeSystems {
 			setFunc[4] = Grades.class.getMethod("setfinalExam", parameterTypes);
 
 			for (int i = 0; i < setFunc.length; i++) {
-				System.out.printf("更改%s %s 分數? (yes/no)", moStuGrade.getName(), displayLabel[i]);
+				System.out.printf("更改%s %s 分數? (yes/no)", moStuGrade.getName(),
+						displayLabel[i]);
 				if (scanner.next().charAt(0) == 'y') {
-					System.out.printf("輸入%s %s新分數 ", moStuGrade.getName(), displayLabel[i]);
-					
+					System.out.printf("輸入%s %s新分數 ", moStuGrade.getName(),
+							displayLabel[i]);
+
 					Object[] parameters = new Object[1];
-			        parameters[0] = Integer.parseInt(scanner.next());
-			        setFunc[i].invoke(moStuGrade, parameters);
-			        
-			        System.out.printf("%s新分數%s %s 改好了\n", moStuGrade.getName(), displayLabel[i], parameters[0].toString());
+					parameters[0] = Integer.parseInt(scanner.next());
+					setFunc[i].invoke(moStuGrade, parameters);
+					// 對 parameters 這個物件，做 moStuGrade(METHOD) 的事情
+
+					System.out.printf("%s新分數%s %s 改好了\n", moStuGrade.getName(),
+							displayLabel[i], parameters[0].toString());
 				}
 			}
-			
-			if(writeBackDataBase()) {
-				System.out.printf("更改分數%s %s 完成了", moStuGrade.getID(), moStuGrade.getName());
-			}
+
+			System.out.printf("更改分數%s %s 完成了", moStuGrade.getID(),
+					moStuGrade.getName());
+
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -261,8 +264,9 @@ public class GradeSystems {
 	private void setWeights(float[] newWeight) {
 		System.out
 				.printf("請確認新配分\n\tlab1 %.0f%%\n\tlab2 %.0f%%\n\tlab3 %.0f%%\n\tmid-term %.0f%%\n\tfinal exam %.0f%%\n  以上正確嗎? Y (Yes) 或 N (No)",
-						newWeight[0], newWeight[1], newWeight[2], newWeight[3],
-						newWeight[4]);
+						newWeight[0] * 100, newWeight[1] * 100,
+						newWeight[2] * 100, newWeight[3] * 100,
+						newWeight[4] * 100);
 
 		if (scanner.next().charAt(0) == 'Y') {
 			weights = newWeight;
@@ -272,15 +276,15 @@ public class GradeSystems {
 	private void getNewWeights(float[] newWeight) {
 		System.out.println("輸入新配分");
 		System.out.printf("\tlab1 ");
-		newWeight[0] = Float.valueOf(scanner.next());
+		newWeight[0] = Float.valueOf(scanner.next()) / 100;
 		System.out.printf("\tlab2 ");
-		newWeight[1] = Float.valueOf(scanner.next());
+		newWeight[1] = Float.valueOf(scanner.next()) / 100;
 		System.out.printf("\tlab3 ");
-		newWeight[2] = Float.valueOf(scanner.next());
+		newWeight[2] = Float.valueOf(scanner.next()) / 100;
 		System.out.printf("\tmid-term ");
-		newWeight[3] = Float.valueOf(scanner.next());
+		newWeight[3] = Float.valueOf(scanner.next()) / 100;
 		System.out.printf("\tfinalExam ");
-		newWeight[4] = Float.valueOf(scanner.next());
+		newWeight[4] = Float.valueOf(scanner.next()) / 100;
 	}
 
 	private Grades getNewStudentGrade() {
@@ -308,7 +312,7 @@ public class GradeSystems {
 						weights[3] * 100, weights[4] * 100);
 	}
 
-	private boolean writeBackDataBase() {
+	public boolean writeBackDataBase() {
 		BufferedWriter out;
 
 		try {

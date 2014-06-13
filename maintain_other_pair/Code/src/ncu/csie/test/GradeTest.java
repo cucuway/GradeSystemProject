@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class GradeTest {
 
-	Grades aGrade;
+	Grades aGrade; //test
 
 	@Before
 	public void setUp() throws Exception {

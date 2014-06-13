@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import ncu.csie.UI;
 import ncu.csie.exceptions.DuplicateExceptions;
@@ -200,4 +201,47 @@ public class UnitTest {
 						myUI.aGradeSystem.containsID("985002002"))
 						.getTotalGrade());
 	}
+
+	@Test(expected = DuplicateExceptions.class)
+	public void testAddStudentDup() throws NoSuchIDExceptions,
+			NoSuchCommandExceptions, DuplicateExceptions {
+
+		inContent = new ByteArrayInputStream(
+				"985002002\nA\n985002002\nQ\nQ".getBytes());
+		System.setIn(inContent);
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		myUI = new UI();
+	}
+	
+	@Test
+	public void testAddStudent() throws NoSuchIDExceptions,
+			NoSuchCommandExceptions, DuplicateExceptions {
+
+		inContent = new ByteArrayInputStream(
+				"985002002\nA\n995002903\n±i¤@¤G\n90\n70\n80\n60\n50\nyes\nQ\n995002903\nQ\nQ".getBytes());
+		System.setIn(inContent);
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		myUI = new UI();
+
+		assert(Arrays.equals(new int[]{90, 70, 80, 60, 50}, myUI.aGradeSystem.aList.get(
+				myUI.aGradeSystem.containsID("995002903")).gradeArray()));
+	}
+
+	@Test
+	public void testModify() throws NoSuchIDExceptions,
+			NoSuchCommandExceptions, DuplicateExceptions {
+
+		inContent = new ByteArrayInputStream(
+				"985002002\nM\n962001044\nno\nyes\n90\nno\nno\nno\nQ\nQ".getBytes());
+		System.setIn(inContent);
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		myUI = new UI();
+		assertEquals(90, 
+		myUI.aGradeSystem.aList.get(
+				myUI.aGradeSystem.containsID("962001044")).getlab2());
+	}
+
 }

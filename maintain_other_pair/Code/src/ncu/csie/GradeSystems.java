@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import ncu.csie.exceptions.DuplicateExceptions;
 import ncu.csie.exceptions.NoSuchIDExceptions;
-import ncu.csie.modle.Grades;
+import ncu.csie.model.Grades;
 
 /**
  * *************************************************************************

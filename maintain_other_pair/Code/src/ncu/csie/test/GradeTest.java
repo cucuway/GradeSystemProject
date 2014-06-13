@@ -1,7 +1,7 @@
 package ncu.csie.test;
 
 import static org.junit.Assert.*;
-import ncu.csie.modle.Grades;
+import ncu.csie.model.Grades;
 
 import org.junit.After;
 import org.junit.Before;

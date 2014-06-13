@@ -10,8 +10,8 @@ import ncu.csie.exceptions.NoSuchIDExceptions;
  * *********************************************************************** class
  * UI (user interface)
  * 
- * checkID(ID) //ÀË¬dID¬O§_¦s¦b promptCommand() //­n¨D¿é¤J«ü¥O promptID() //­n¨D¿é¤JID
- * showFinishMsg() //Åã¥Üµ²§ô°T®§ showWelcomeMsg() //Åã¥ÜÅwªï°T®§ UI() «Øºc¤l «Øºc aGradeSystem
+ * checkID(ID) //æª¢æŸ¥IDæ˜¯å¦å­˜åœ¨ promptCommand() //è¦æ±‚è¼¸å…¥æŒ‡ä»¤ promptID() //è¦æ±‚è¼¸å…¥ID
+ * showFinishMsg() //é¡¯ç¤ºçµæŸè¨Šæ¯ showWelcomeMsg() //é¡¯ç¤ºæ­¡è¿è¨Šæ¯ UI() å»ºæ§‹å­ å»ºæ§‹ aGradeSystem
  ************************************************************************ */
 
 public class UI {
@@ -22,7 +22,7 @@ public class UI {
 
 	/**
 	 * ------------------------------------------------------------------------
-	 * UI() «Øºc¤l throws NoSuchIDExceptions, NoSuchCommandExceptions
+	 * UI() å»ºæ§‹å­ throws NoSuchIDExceptions, NoSuchCommandExceptions
 	 * ------------------------------------------------------------
 	 * @throws DuplicateExceptions 
 	 */
@@ -51,7 +51,7 @@ public class UI {
 	/**
 	 * ------------------------------------------------------------------------
 	 * checkID (ID) throws NoSuchIDExceptions return Boolean parameter: ID a
-	 * user ID ex: 123456789 time: O(n) n is aGradeSystem ¤º¥ş¯Z¤H¼Æ
+	 * user ID ex: 123456789 time: O(n) n is aGradeSystem å…§å…¨ç­äººæ•¸
 	 * 
 	 * -------------------------------------------------------------------------
 	 */
@@ -71,7 +71,7 @@ public class UI {
 	public void promptCommand() throws NoSuchCommandExceptions, DuplicateExceptions, NoSuchIDExceptions {
 		while (true) {
 			System.out
-					.println("¿é¤J«ü¥O\n\t1) G Åã¥Ü¦¨ÁZ (Grade)\n\t2) R Åã¥Ü±Æ¦W (Rank)\n\t3) W §ó·s°t¤À (Weight)\n\t4) A ·s¼W¾Ç¥Í (Add)\n\t5) D §R´î¾Ç¥Í (Delete)\n\t6) M §ó§ï¤À¼Æ (Modify)\n\t7) Q µ²§ô¨Ï¥Î  (Quit)\n\t8) S Àx¦sÂ÷¶}  (Save)\n\t\t¨Ï¥ÎªÌ¿é¤J¡G");
+					.println("è¼¸å…¥æŒ‡ä»¤\n\t1) G é¡¯ç¤ºæˆç¸¾ (Grade)\n\t2) R é¡¯ç¤ºæ’å (Rank)\n\t3) W æ›´æ–°é…åˆ† (Weight)\n\t4) A æ–°å¢å­¸ç”Ÿ (Add)\n\t5) D åˆªæ¸›å­¸ç”Ÿ (Delete)\n\t6) M æ›´æ”¹åˆ†æ•¸ (Modify)\n\t7) Q çµæŸä½¿ç”¨  (Quit)\n\t8) S å„²å­˜é›¢é–‹  (Save)\n\t\tä½¿ç”¨è€…è¼¸å…¥ï¼š");
 			String intputCommand = scanner.next();
 			switch (intputCommand.charAt(0)) {
 			case 'G':
@@ -106,12 +106,12 @@ public class UI {
 	}
 
 	private String promptID() {
-		System.out.println("¿é¤JID©Î Q (µ²§ô¨Ï¥Î)");
+		System.out.println("è¼¸å…¥IDæˆ– Q (çµæŸä½¿ç”¨)");
 		return scanner.next();
 	}
 
 	private void showFinishMsg() {
-		System.out.println("µ²§ô¤F");
+		System.out.println("çµæŸäº†");
 	}
 
 	private void showWelcomeMsg(int loginStuIndex) {

@@ -3,9 +3,9 @@ package ncu.csie.model;
 
 /**
  * ********************************************************************** class
- * Grades Àx¦s ID, name, lab1, lab2, lab3, midTerm, finalExam, and totalGrade
+ * Grades å„²å­˜ ID, name, lab1, lab2, lab3, midTerm, finalExam, and totalGrade
  * 
- * calculateTotalGrade(weights) //¨ÌÅv­«­pºâÁ`¦¨¾÷ Grades () { } //«Øºc¤l
+ * calculateTotalGrade(weights) //ä¾æ¬Šé‡è¨ˆç®—ç¸½æˆæ©Ÿ Grades () { } //å»ºæ§‹å­
  ************************************************************************/
 
 public class Grades {
@@ -82,7 +82,7 @@ public class Grades {
 	}
 	
 	public void showGrade() {
-		System.out.printf("\t©m¦W\t%s\n", getName());
+		System.out.printf("\tå§“å\t%s\n", getName());
 		System.out.printf("\tLab1\t%d\n", getlab1());
 		System.out.printf("\tLab2\t%d\n", getlab2());
 		System.out.printf("\tLab3\t%d\n", getlab3());

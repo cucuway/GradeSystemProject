@@ -28,8 +28,8 @@ public class GradeTest {
 		aGrade.setmidTerm(90);
 		aGrade.setfinalExam(93);
 		float[] weights = {0.1f, 0.1f, 0.1f, 0.3f, 0.4f};
-		// 1. ¤âºâ expected result (81*0.1+98*0.1+84*0.1+90*0.3+93*0.4=90.5¥|±Ë¤­¤J91)
-		// 2. ©I¥s aGrade.calculateTotalGrade (weights) ºâactual result
+		// 1. æ‰‹ç®— expected result (81*0.1+98*0.1+84*0.1+90*0.3+93*0.4=90.5å››æ¨äº”å…¥91)
+		// 2. å‘¼å« aGrade.calculateTotalGrade (weights) ç®—actual result
 		// 3. assert equal of the two results
 		aGrade.calculateTotalGrade(weights);
 		assertEquals(aGrade.getTotalGrade(), 91);

@@ -5,12 +5,12 @@ import ncu.csie.exceptions.NoSuchIDExceptions;
 
 public class Main extends Object {
 	/**
-	 * ################################################################## ¥»Grade
-	 * system Åı¨Ï¥ÎªÌ(¾Ç¥Í)¨ú±o¥LªºÁ`¦¨ÁZtotal grade ¤Î±Æ¦W rank. Total grade °ò©ó°t¤Àweights ¨Óºâ ¦Ó
-	 * weights¥i¥Hupdate. Rank ªí¥Ü¦¹ total grade ¦b¥ş¯Z¾Ç¥Íªº¤À¼Æ±Æ§Ç
+	 * ################################################################## æœ¬Grade
+	 * system è®“ä½¿ç”¨è€…(å­¸ç”Ÿ)å–å¾—ä»–çš„ç¸½æˆç¸¾total grade åŠæ’å rank. Total grade åŸºæ–¼é…åˆ†weights ä¾†ç®— è€Œ
+	 * weightså¯ä»¥update. Rank è¡¨ç¤ºæ­¤ total grade åœ¨å…¨ç­å­¸ç”Ÿçš„åˆ†æ•¸æ’åº
 	 * 
-	 * Input file: ¥ş¯Z¾Ç¥Íªº¤À¼Æ ¨Ò¦p 962001044 ­â©v§Ê 87 86 98 88 87 962001051 §õ«Â§Ê 81 98
-	 * 84 90 93 ª`·N data field names ¦p¤U: ID name lab1 lab2 lab3 midTerm finalExam
+	 * Input file: å…¨ç­å­¸ç”Ÿçš„åˆ†æ•¸ ä¾‹å¦‚ 962001044 å‡Œå®—å»· 87 86 98 88 87 962001051 æå¨å»· 81 98
+	 * 84 90 93 æ³¨æ„ data field names å¦‚ä¸‹: ID name lab1 lab2 lab3 midTerm finalExam
 	 * ####################################################################
 	 */
 

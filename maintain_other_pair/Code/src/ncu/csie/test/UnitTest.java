@@ -41,7 +41,7 @@ public class UnitTest {
 		System.setOut(new PrintStream(outContent));
 		myUI = new UI();
 
-		assertEquals("¿é¤JID©Î Q (µ²§ô¨Ï¥Î)\r\nµ²§ô¤F\r\n", outContent.toString());
+		assertEquals("è¼¸å…¥IDæˆ– Q (çµæŸä½¿ç”¨)\r\nçµæŸäº†\r\n", outContent.toString());
 
 	}
 
@@ -56,7 +56,7 @@ public class UnitTest {
 		myUI = new UI();
 
 		assertEquals(
-				"³\¤åÄÉ¦¨ÁZ¡G lab1¡G     88¡@\n\tlab2¡G     92¡@\n\tlab3¡G     88¡@\n\tmid-term :  98¡@\n\tfinal exam¡G91¡@\n\ttotal grade : 93\n",
+				"è¨±æ–‡é¦¨æˆç¸¾ï¼š lab1ï¼š     88ã€€\n\tlab2ï¼š     92ã€€\n\tlab3ï¼š     88ã€€\n\tmid-term :  98ã€€\n\tfinal examï¼š91ã€€\n\ttotal grade : 93\n",
 				myUI.aGradeSystem.showGrade("955002056"));
 
 	}
@@ -72,7 +72,7 @@ public class UnitTest {
 		myUI = new UI();
 
 		assertEquals(
-				"Ä¬«G¦¨ÁZ¡G lab1¡G     81¡@\n\tlab2¡G     91¡@\n\tlab3¡G     85¡@\n\tmid-term :  84¡@\n\tfinal exam¡G90¡@\n\ttotal grade : 87\n",
+				"è˜‡äº®æˆç¸¾ï¼š lab1ï¼š     81ã€€\n\tlab2ï¼š     91ã€€\n\tlab3ï¼š     85ã€€\n\tmid-term :  84ã€€\n\tfinal examï¼š90ã€€\n\ttotal grade : 87\n",
 				myUI.aGradeSystem.showGrade("985002201"));
 
 	}
@@ -219,7 +219,7 @@ public class UnitTest {
 			NoSuchCommandExceptions, DuplicateExceptions {
 
 		inContent = new ByteArrayInputStream(
-				"985002002\nA\n995002903\n±i¤@¤G\n90\n70\n80\n60\n50\nyes\nQ\n995002903\nQ\nQ".getBytes());
+				"985002002\nA\n995002903\nå¼µä¸€äºŒ\n90\n70\n80\n60\n50\nyes\nQ\n995002903\nQ\nQ".getBytes());
 		System.setIn(inContent);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
